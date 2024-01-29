@@ -6,7 +6,7 @@ def compress_images(input_folder, output_folder, max_size_kb):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    image_files = [f for f in os.listdir(input_folder) if f.lower().endswith('.png')]
+    image_files = [f for f in os.listdir(input_folder) if f.lower().endswith('.png', '.jpg', '.jpeg')]
 
     for image_file in tqdm(image_files, desc="Overall Progress", unit="photo"):
         input_path = os.path.join(input_folder, image_file)
