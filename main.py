@@ -14,6 +14,8 @@ def compress_images(input_folder, output_folder, max_size_kb):
 
         img = Image.open(input_path)
 
+        img = img.convert('RGB')
+
         for quality in tqdm(range(100, 0, -1), desc=f"Compression {image_file}", leave=False):
             img.save(output_path, quality=quality)
 
