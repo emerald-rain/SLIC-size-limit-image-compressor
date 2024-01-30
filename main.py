@@ -50,7 +50,7 @@ if __name__ == "__main__":
     print("Specify the input and output data folders. \nPress Enter without providing any input to use the default folders `input_folder` and `output_folder`.\n")
 
     input_folder = input("INPUT image folder path: ") or 'input_folder'
-    output_folder = input("OTPUT image folder path: ") or 'output_folder'
+    output_folder = input("OUTPUT image folder path: ") or 'output_folder'
 
     print("\nSpecify the maximum output image size. \nLeave the field blank for .jpg conversion with quality preservation, which can also reduce size.\n")
     max_size_kb = int(input("MAX size per image in KB: ")) if input("MAX size per image in KB: ") else None
