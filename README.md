@@ -1,4 +1,4 @@
-# SLIC Size Limit Image Compressor
+# SLIC Size Limiter for Image Compression
 Was invented to compress my oversized screenshots for easy storage, but can be used on any images.
 
 Input images [PNG, JPG, JPEG]. Output [JPG].
