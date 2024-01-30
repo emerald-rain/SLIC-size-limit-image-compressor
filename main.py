@@ -3,11 +3,6 @@ import os
 from tqdm import tqdm
 
 def compress_images(input_folder, output_folder, max_size_kb):
-    if not os.path.exists(input_folder):
-        os.makedirs(input_folder)
-
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
 
     # This function compresses all images from the input_folder to the output_folder. 
     # All images are saved in .jpg format. The quality of an image is gradually reduced 
@@ -23,13 +18,22 @@ def compress_images(input_folder, output_folder, max_size_kb):
 
         img = img.convert('RGB')
 
-        for quality in tqdm(range(100, 0, -1), desc=f"Compression {image_file}", leave=False):
-            img.save(output_path, quality=quality)
+        if max_size_kb:  # Check if max_size_kb is provided
+            for quality in tqdm(range(100, 0, -1), desc=f"Compression {image_file}", leave=False):
+                img.save(output_path, quality=quality)
 
-            if os.path.getsize(output_path) <= max_size_kb * 1024:
-                break
+                if os.path.getsize(output_path) <= max_size_kb * 1024:
+                    break
+        else:
+            img.save(output_path, format='JPEG', quality=100)
 
 if __name__ == "__main__":
+    if not os.path.exists('input_folder'):
+        os.makedirs('input_folder')
+
+    if not os.path.exists('output_folder'):
+        os.makedirs('output_folder')
+
     ascii_art = """ 
 
  ░▒▓███████▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓██████▓▒░  
@@ -39,17 +43,18 @@ if __name__ == "__main__":
        ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░        
        ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
 ░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓██████▓▒░  
-    Size Limiter for Image Compression\n
+      Size Limiter for Image Compression\n
     """
     print(ascii_art)
 
-    print("Specify the input and output data folders. \nPress Enter without providing any input to use the default folders `input_folder` and `output_folder`. \nIf these folders do not exist yet, they will be created after the first empty run.\n")
+    print("Specify the input and output data folders. \nPress Enter without providing any input to use the default folders `input_folder` and `output_folder`.\n")
 
     input_folder = input("INPUT image folder path: ") or 'input_folder'
     output_folder = input("OTPUT image folder path: ") or 'output_folder'
 
     print("\nSpecify the maximum output image size. \nLeave the field blank for .jpg conversion with quality preservation, which can also reduce size.\n")
-    max_size_kb = int(input("MAX size per image in KB: "))
+    max_size_kb = int(input("MAX size per image in KB: ")) if input("MAX size per image in KB: ") else None
+
 
     print()  # Add an empty line for spacing
 
