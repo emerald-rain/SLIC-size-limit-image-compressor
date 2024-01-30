@@ -3,10 +3,17 @@ import os
 from tqdm import tqdm
 
 def compress_images(input_folder, output_folder, max_size_kb):
+    if not os.path.exists(input_folder):
+        os.makedirs(input_folder)
+
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    image_files = [f for f in os.listdir(input_folder) if f.lower().endswith('.png', '.jpg', '.jpeg')]
+    # This function compresses all images from the input_folder to the output_folder. 
+    # All images are saved in .jpg format. The quality of an image is gradually reduced 
+    # until its size is less than the max_size_kb. 
+
+    image_files = [f for f in os.listdir(input_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
 
     for image_file in tqdm(image_files, desc="Overall Progress", unit="photo"):
         input_path = os.path.join(input_folder, image_file)
@@ -23,10 +30,21 @@ def compress_images(input_folder, output_folder, max_size_kb):
                 break
 
 if __name__ == "__main__":
-    input_folder = input("Enter the path to the folder with .png images: ")
-    output_folder = input("Enter the path to save .jpg images: ")
-    max_size_kb = int(input("Enter the maximum size (in KB) for each image: "))
+    input_folder = input("Enter the image folder path or use the default folder by skipping: ") or 'input_folder'
+    output_folder = input("Enter the output folder path or use the default folder by skipping: ") or 'output_folder'
+    max_size_kb = int(input("Enter the maximum size for each image (1024KB-2048KB recommended): "))
+
+    print()  # Add an empty line for spacing
 
     compress_images(input_folder, output_folder, max_size_kb)
 
-    print("Process completed.")
+    # Display summary
+    input_folder_size = sum(os.path.getsize(os.path.join(input_folder, f)) for f in os.listdir(input_folder))
+    output_folder_size = sum(os.path.getsize(os.path.join(output_folder, f)) for f in os.listdir(output_folder))
+
+    print(f"\nSummary:")
+    print(f"Input folder size: {input_folder_size / (1024 * 1024):.2f} MB")
+    print(f"Output folder size: {output_folder_size / (1024 * 1024):.2f} MB")
+
+    # Wait for Enter key press
+    input("\nPress Enter to exit.")
