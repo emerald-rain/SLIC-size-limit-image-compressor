@@ -39,15 +39,17 @@ if __name__ == "__main__":
        ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░        
        ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
 ░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓██████▓▒░  
-    Size Limiter for Image Compression
-
+    Size Limiter for Image Compression\n
     """
     print(ascii_art)
 
+    print("Specify the input and output data folders. \nPress Enter without providing any input to use the default folders `input_folder` and `output_folder`. \nIf these folders do not exist yet, they will be created after the first empty run.\n")
 
-    input_folder = input("Enter the image folder path or use the default folder by skipping: ") or 'input_folder'
-    output_folder = input("Enter the output folder path or use the default folder by skipping: ") or 'output_folder'
-    max_size_kb = int(input("Enter the maximum size for each image (1024KB-2048KB recommended): "))
+    input_folder = input("INPUT image folder path: ") or 'input_folder'
+    output_folder = input("OTPUT image folder path: ") or 'output_folder'
+
+    print("\nSpecify the maximum output image size. \nLeave the field blank for .jpg conversion with quality preservation, which can also reduce size.\n")
+    max_size_kb = int(input("MAX size per image in KB: "))
 
     print()  # Add an empty line for spacing
 
