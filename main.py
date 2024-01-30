@@ -30,6 +30,21 @@ def compress_images(input_folder, output_folder, max_size_kb):
                 break
 
 if __name__ == "__main__":
+    ascii_art = """ 
+
+ ░▒▓███████▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓██████▓▒░  
+░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░        
+ ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░        
+       ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░        
+       ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓██████▓▒░  
+    Size Limiter for Image Compression
+
+    """
+    print(ascii_art)
+
+
     input_folder = input("Enter the image folder path or use the default folder by skipping: ") or 'input_folder'
     output_folder = input("Enter the output folder path or use the default folder by skipping: ") or 'output_folder'
     max_size_kb = int(input("Enter the maximum size for each image (1024KB-2048KB recommended): "))
